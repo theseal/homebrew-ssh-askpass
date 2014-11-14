@@ -1,39 +1,21 @@
 require "formula"
 
-# Documentation: https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Formula-Cookbook.md
-#                /usr/local/Library/Contributions/example-formula.rb
-# PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
-
 class SshAskpass < Formula
-  homepage ""
+  homepage "https://github.com/theseal/ssh-askpass/"
   url "https://github.com/theseal/ssh-askpass/archive/v1.0.0.tar.gz"
-  sha1 ""
-
-  # depends_on "cmake" => :build
-  depends_on :x11 # if your formula requires any X11/XQuartz components
+  sha1 "92f5402e3b1ad3ceab3f07d18797bf3ab48fca80"
 
   def install
-    # ENV.deparallelize  # if your formula fails when building in parallel
-
-    # Remove unrecognized options if warned by configure
-    system "./configure", "--disable-debug",
-                          "--disable-dependency-tracking",
-                          "--disable-silent-rules",
-                          "--prefix=#{prefix}"
-    # system "cmake", ".", *std_cmake_args
-    system "make", "install" # if this fails, try separate make/make install steps
+    bin.install "ssh-askpass"
   end
 
-  test do
-    # `test do` will create, run in and delete a temporary directory.
-    #
-    # This test will fail and we won't accept that! It's enough to just replace
-    # "false" with the main program this formula installs, but it'd be nice if you
-    # were more thorough. Run the test with `brew test ssh-askpass`. Options passed
-    # to `brew install` such as `--HEAD` also need to be provided to `brew test`.
-    #
-    # The installed folder is not in the path, so use the entire path to any
-    # executables being tested: `system "#{bin}/program", "do", "something"`.
-    system "false"
+  def caveats; <<-EOF.undent
+    In order to use ssh-askpass with ssh you have to link the binary to /usr/libexec:
+
+    sudo ln -s /usr/local/bin/ssh-askpass /usr/libexec/ssh-askpass
+
+    NOTE: When uninstalling ssh-askpass the symlink needs to be removed manually.
+    EOF
   end
 end
+
