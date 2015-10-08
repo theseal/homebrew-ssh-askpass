@@ -10,9 +10,22 @@ class SshAskpass < Formula
   end
 
   def caveats; <<-EOF.undent
-    In order to use ssh-askpass with ssh you have to link the binary to /usr/libexec:
+    In order to use ssh-askpass you have to link the binary to where the ssh-agent
+    is looking.
 
-    sudo ln -s /usr/local/bin/ssh-askpass /usr/libexec/ssh-askpass
+    For OS X pre 10.11:
+
+        sudo ln -s /usr/local/bin/ssh-askpass /usr/libexec/ssh-askpass
+
+    For OS 10.11+:
+
+        Disable SIP (rootless) http://www.imore.com/el-capitan-system-integrity-protection-helps-keep-malware-away
+
+        sudo mkdir -p /usr/X11R6/bin
+        sudo ln -s $PWD/ssh-askpass /usr/X11R6/bin/ssh-askpass
+        chmod +x /usr/X11R6/bin/ssh-askpass
+
+        Enable SIP (rootless) http://www.imore.com/el-capitan-system-integrity-protection-helps-keep-malware-away
 
     NOTE: When uninstalling ssh-askpass the symlink needs to be removed manually.
     EOF
