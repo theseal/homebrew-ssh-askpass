@@ -34,7 +34,7 @@ class SshAskpass < Formula
     <key>EnvironmentVariables</key>
     <dict>
         <key>SSH_ASKPASS</key>
-        <string>#{opt_bin}/askpass</string>
+        <string>#{opt_bin}/ssh-askpass</string>
         <key>DISPLAY</key>
         <string>https://github.com/openssh/openssh-portable/blob/94141b7/readpass.c#L144-L156</string>
     </dict>
