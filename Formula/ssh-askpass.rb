@@ -50,7 +50,8 @@ class SshAskpass < Formula
       ssh-add -c $HOME/.ssh/id_rsa
 
     TODO: add support for loading keys with Keychain passwords
-    The LaunchAgent is because we need to hook ssh-agent's environment
+    The LaunchAgent is because we need to hook ssh-agent's environment. Ignore
+    the instruction to `launchctl load`; you have to log out/back in.
     EOF
   end
 end
