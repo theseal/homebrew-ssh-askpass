@@ -45,17 +45,12 @@ class SshAskpass < Formula
   end
 
   def caveats; <<-EOF.undent
-    To use ssh-askpass, ssh-agent has to be started with some specific
-    environment variables. To do that, run...
-
-      cp #{plist_path} ~/Libraray/LaunchAgents
-
-    and log out/in. Also you have to load your keys by hand
-    Note: actual key locations may vary
+    For now, you need to load your keys by hand (actual path to key may vary):
 
       ssh-add -c $HOME/.ssh/id_rsa
 
     TODO: add support for loading keys with Keychain passwords
+    The LaunchAgent is because we need to hook ssh-agent's environment
     EOF
   end
 end
