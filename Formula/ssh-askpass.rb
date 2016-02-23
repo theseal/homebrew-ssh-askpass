@@ -9,26 +9,53 @@ class SshAskpass < Formula
     bin.install "ssh-askpass"
   end
 
+  def plist; <<-EOS.undent
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>#{plist_name}</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/usr/bin/ssh-agent</string>
+		<string>-l</string>
+	</array>
+	<key>Sockets</key>
+	<dict>
+		<key>Listeners</key>
+		<dict>
+			<key>SecureSocketWithKey</key>
+			<string>SSH_AUTH_SOCK</string>
+		</dict>
+	</dict>
+    <key>EnableTransactions</key>
+    <true/>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>SSH_ASKPASS</key>
+        <string>#{opt_bin}/askpass</string>
+        <key>DISPLAY</key>
+        <string>https://github.com/openssh/openssh-portable/blob/94141b7/readpass.c#L144-L156</string>
+    </dict>
+</dict>
+</plist>
+    EOS
+
+  end
+
   def caveats; <<-EOF.undent
-    In order to use ssh-askpass you have to link the binary to where the ssh-agent
-    is looking.
+    To use ssh-askpass, ssh-agent has to be started with some specific
+    environment variables. To do that, run...
 
-    For OS X pre 10.11:
+      cp #{plist_path} ~/Libraray/LaunchAgents
 
-        sudo ln -s /usr/local/bin/ssh-askpass /usr/libexec/ssh-askpass
+    and log out/in. Also you have to load your keys by hand
+    Note: actual key locations may vary
 
-    For OS 10.11+:
+      ssh-add -c $HOME/.ssh/id_rsa
 
-        Disable SIP (rootless) http://www.imore.com/el-capitan-system-integrity-protection-helps-keep-malware-away
-
-        sudo mkdir -p /usr/X11R6/bin
-        sudo ln -s $PWD/ssh-askpass /usr/X11R6/bin/ssh-askpass
-        chmod +x /usr/X11R6/bin/ssh-askpass
-
-        Enable SIP (rootless) http://www.imore.com/el-capitan-system-integrity-protection-helps-keep-malware-away
-
-    NOTE: When uninstalling ssh-askpass the symlink needs to be removed manually.
+    TODO: add support for loading keys with Keychain passwords
     EOF
   end
 end
-
