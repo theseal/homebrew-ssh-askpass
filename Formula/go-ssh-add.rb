@@ -12,6 +12,7 @@ class GoSshAdd < Formula
     root_url "https://github.com/tmaher/go-ssh-add/releases/download/0.1.0"
 
     cellar :any_skip_relocation
+    sha256 "567fd532768ad4d7018e8fe943fbd018ed9b13372d22acc56d30d0425df52405" => :yosemite
     sha256 "9b756ec7e94b2d09e55ab701dfc1c972b1ef7183506b0ed8f10f81a89234a436" => :el_capitan
   end
 
