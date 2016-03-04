@@ -35,7 +35,7 @@ class GoSshAdd < Formula
 
     cd gopath/"src/github.com/tmaher/go-ssh-add" do
       system "go", "install"
-      bin.install "bin/go-ssh-add"
+      bin.install gopath/"bin/go-ssh-add"
     end
   end
 
