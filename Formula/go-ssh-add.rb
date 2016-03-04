@@ -8,6 +8,13 @@ class GoSshAdd < Formula
   depends_on "go" => :build
   depends_on "godep" => :build
 
+  bottle do
+    root_url "https://github.com/tmaher/go-ssh-add/releases/download/0.1.0"
+
+    cellar :any_skip_relocation
+    sha256 "9b756ec7e94b2d09e55ab701dfc1c972b1ef7183506b0ed8f10f81a89234a436" => :el_capitan
+  end
+
   go_resource "golang.org/x/crypto" do
     url "https://go.googlesource.com/crypto.git",
       :revision => '5dc8cb4b8a8eb076cbb5a06bc3b8682c15bdbbd3'
