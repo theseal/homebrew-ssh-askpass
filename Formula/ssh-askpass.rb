@@ -19,15 +19,24 @@ class SshAskpass < Formula
 
     For OS 10.11+:
 
-        Disable SIP (rootless) http://www.imore.com/el-capitan-system-integrity-protection-helps-keep-malware-away
+        If you have XQuartz (http://www.xquartz.org/) or are willing to get it:
 
-        sudo mkdir -p /usr/X11R6/bin
-        sudo ln -s $PWD/ssh-askpass /usr/X11R6/bin/ssh-askpass
-        chmod +x /usr/X11R6/bin/ssh-askpass
+            Make sure that the latest XQuartz is installed. (eg. brew cask install xquartz)
 
-        Enable SIP (rootless) http://www.imore.com/el-capitan-system-integrity-protection-helps-keep-malware-away
+            sudo ln -s /usr/local/bin/ssh-askpass /usr/X11R6/bin/ssh-askpass
+
+        Else:
+
+            Disable SIP (rootless) http://www.imore.com/el-capitan-system-integrity-protection-helps-keep-malware-away
+
+            sudo mkdir -p /usr/X11R6/bin
+            sudo ln -s $PWD/ssh-askpass /usr/X11R6/bin/ssh-askpass
+            chmod +x /usr/X11R6/bin/ssh-askpass
+
+            Enable SIP (rootless) http://www.imore.com/el-capitan-system-integrity-protection-helps-keep-malware-away
 
     NOTE: When uninstalling ssh-askpass the symlink needs to be removed manually.
+    NOTE: If XQuartz is reinstalled you need to create the symlink again.
     EOF
   end
 end
