@@ -4,7 +4,7 @@ require 'formula'
 class SshAskpass < Formula
   homepage 'https://github.com/tmaher/ssh-askpass/'
   url 'https://codeload.github.com/tmaher/ssh-askpass/tar.gz/v1.1.0'
-  sha1 '640ce363c14fbebad637ee95a1dc875267158095'
+  sha256 'fc140cfb914c44cae449b96e2082ac13adbc02c3cd5a7fd837bc009a2bbc9c27'
 
   def install
     bin.install 'ssh-askpass'
