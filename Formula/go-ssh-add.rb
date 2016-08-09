@@ -4,7 +4,7 @@ require "language/go"
 class GoSshAdd < Formula
   homepage "https://github.com/tmaher/go-ssh-add/"
   url "https://github.com/tmaher/go-ssh-add/archive/0.1.0.tar.gz"
-  sha1 "412d9e865728abf953cd120ae941f120df892a98"
+  sha256 'fc140cfb914c44cae449b96e2082ac13adbc02c3cd5a7fd837bc009a2bbc9c27'
   depends_on "go" => :build
   depends_on "godep" => :build
 
