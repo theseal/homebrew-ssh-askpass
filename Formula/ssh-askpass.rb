@@ -1,12 +1,13 @@
-require "formula"
+require 'formula'
 
+# Homebrew formula to install ssh password asker
 class SshAskpass < Formula
-  homepage "https://github.com/tmaher/ssh-askpass/"
-  url "https://codeload.github.com/tmaher/ssh-askpass/tar.gz/v1.1.0"
-  sha1 "640ce363c14fbebad637ee95a1dc875267158095"
+  homepage 'https://github.com/tmaher/ssh-askpass/'
+  url 'https://codeload.github.com/tmaher/ssh-askpass/tar.gz/v1.1.0'
+  sha1 '640ce363c14fbebad637ee95a1dc875267158095'
 
   def install
-    bin.install "ssh-askpass"
+    bin.install 'ssh-askpass'
   end
 
   def plist; <<-EOS.undent
@@ -41,7 +42,6 @@ class SshAskpass < Formula
 </dict>
 </plist>
     EOS
-
   end
 
   def caveats; <<-EOF.undent
