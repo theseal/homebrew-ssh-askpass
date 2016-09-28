@@ -13,11 +13,11 @@ class SshAskpass < Formula
     In order to use ssh-askpass you have to link the binary to where the ssh-agent
     is looking.
 
-    For OS X pre 10.11:
+    Pre 10.11:
 
         sudo ln -s /usr/local/bin/ssh-askpass /usr/libexec/ssh-askpass
 
-    For OS 10.11+:
+    10.11+:
 
         If you have XQuartz (http://www.xquartz.org/) or are willing to get it:
 
