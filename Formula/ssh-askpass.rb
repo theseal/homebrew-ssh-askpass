@@ -44,7 +44,7 @@ class SshAskpass < Formula
   end
 
   def caveats; <<-EOF.undent
-    NOTE: After you have started the launchd service (read below) you need to log out and in (reboot preferrd) before you can add keys to the agent with `ssh-add -c`.
+    NOTE: After you have started the launchd service (read below) you need to log out and in (reboot might be easiest) before you can add keys to the agent with `ssh-add -c`.
     EOF
   end
 end
