@@ -9,33 +9,42 @@ class SshAskpass < Formula
     bin.install "ssh-askpass"
   end
 
+  def plist; <<-EOS.undent
+    <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+        <plist version="1.0">
+        <dict>
+                <key>Label</key>
+                <string>com.openssh.ssh-agent-ssh-askpass</string>
+                <key>ProgramArguments</key>
+                <array>
+                        <string>/usr/bin/ssh-agent</string>
+                        <string>-l</string>
+                </array>
+                <key>EnvironmentVariables</key>
+                <dict>
+                        <key>SSH_ASKPASS</key>
+                        <string>/usr/local/bin/ssh-askpass</string>
+                        <key>DISPLAY</key>
+                        <string>0</string>
+                </dict>
+                <key>Sockets</key>
+                <dict>
+                        <key>Listeners</key>
+                        <dict>
+                                <key>SecureSocketWithKey</key>
+                                <string>SSH_AUTH_SOCK</string>
+                        </dict>
+                </dict>
+                <key>EnableTransactions</key>
+                <true/>
+        </dict>
+        </plist>
+    EOS
+  end
+
   def caveats; <<-EOF.undent
-    In order to use ssh-askpass you have to link the binary to where the ssh-agent
-    is looking.
-
-    Pre 10.11:
-
-        sudo ln -s /usr/local/bin/ssh-askpass /usr/libexec/ssh-askpass
-
-    10.11+:
-
-        If you have XQuartz (http://www.xquartz.org/) or are willing to get it:
-
-            Make sure that the latest XQuartz is installed. (eg. brew cask install xquartz)
-
-            sudo ln -s /usr/local/bin/ssh-askpass /usr/X11R6/bin/ssh-askpass
-
-        Else:
-
-            Disable SIP (rootless) http://www.imore.com/el-capitan-system-integrity-protection-helps-keep-malware-away
-
-            sudo mkdir -p /usr/X11R6/bin
-            sudo ln -s /usr/local/bin/ssh-askpass /usr/X11R6/bin/ssh-askpass
-
-            Enable SIP (rootless) http://www.imore.com/el-capitan-system-integrity-protection-helps-keep-malware-away
-
-    NOTE: When uninstalling ssh-askpass the symlink needs to be removed manually.
-    NOTE: If XQuartz is reinstalled you need to create the symlink again.
+    NOTE: After you have started the launchd service (read below) you need to log out and in (reboot preferrd) before you can add keys to the agent with `ssh-add -c`.
     EOF
   end
 end
