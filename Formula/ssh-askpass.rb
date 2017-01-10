@@ -15,7 +15,7 @@ class SshAskpass < Formula
         <plist version="1.0">
         <dict>
                 <key>Label</key>
-                <string>com.openssh.ssh-agent-ssh-askpass</string>
+                <string>#{plist_name}</string>
                 <key>ProgramArguments</key>
                 <array>
                         <string>/usr/bin/ssh-agent</string>
@@ -24,7 +24,7 @@ class SshAskpass < Formula
                 <key>EnvironmentVariables</key>
                 <dict>
                         <key>SSH_ASKPASS</key>
-                        <string>/usr/local/bin/ssh-askpass</string>
+                        <string>#{opt_bin}/ssh-askpass</string>
                         <key>DISPLAY</key>
                         <string>0</string>
                 </dict>
