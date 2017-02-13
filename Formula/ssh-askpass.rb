@@ -6,40 +6,35 @@ class SshAskpass < Formula
   url 'https://codeload.github.com/tmaher/ssh-askpass/tar.gz/v1.1.0'
   sha256 'fc140cfb914c44cae449b96e2082ac13adbc02c3cd5a7fd837bc009a2bbc9c27'
 
+  DISPLAY_TEXT='https://github.com/openssh/openssh-portable/blob/94141b7/readpass.c#L144-L156'.freeze
+
   def install
     bin.install 'ssh-askpass'
   end
 
   def plist; <<-EOS.undent
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>Label</key>
-	<string>#{plist_name}</string>
-	<key>ProgramArguments</key>
-	<array>
-		<string>/usr/bin/ssh-agent</string>
-		<string>-l</string>
-	</array>
-	<key>Sockets</key>
-	<dict>
-		<key>Listeners</key>
-		<dict>
-			<key>SecureSocketWithKey</key>
-			<string>SSH_AUTH_SOCK</string>
-		</dict>
-	</dict>
-    <key>EnableTransactions</key>
-    <true/>
-    <key>EnvironmentVariables</key>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
     <dict>
-        <key>SSH_ASKPASS</key>
-        <string>#{opt_bin}/ssh-askpass</string>
-        <key>DISPLAY</key>
-        <string>https://github.com/openssh/openssh-portable/blob/94141b7/readpass.c#L144-L156</string>
-    </dict>
-</dict>
+    <key>Label</key>
+    <string>#{plist_name}</string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/bin/sh</string>
+      <string>-c</string>
+      <string>
+        /bin/launchctl setenv SSH_ASKPASS \"#{opt_bin}/ssh-askpass\"
+        if [ -z $DISPLAY ]; then
+          /bin/launchctl setenv DISPLAY \"#{DISPLAY_TEXT}\"
+        fi
+      </string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>ServiceIPC</key>
+    <false/>
+  </dict>
 </plist>
     EOS
   end
