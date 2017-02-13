@@ -28,6 +28,9 @@ class SshAskpass < Formula
         if [ -z $DISPLAY ]; then
           /bin/launchctl setenv DISPLAY \"#{DISPLAY_TEXT}\"
         fi
+        if [ -x \"#{opt_bin}/go-ssh-add\" ]; then
+          \"#{opt_bin}/go-ssh-add\" add-all
+        fi
       </string>
     </array>
     <key>RunAtLoad</key>
@@ -44,7 +47,6 @@ class SshAskpass < Formula
 
       ssh-add -c $HOME/.ssh/id_rsa
 
-    TODO: add support for loading keys with Keychain passwords
     The LaunchAgent is because we need to hook ssh-agent's environment. Ignore
     the instruction to `launchctl load`; you have to log out/back in.
     EOF
