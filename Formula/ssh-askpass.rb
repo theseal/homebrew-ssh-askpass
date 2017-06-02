@@ -2,8 +2,8 @@ require "formula"
 
 class SshAskpass < Formula
   homepage "https://github.com/theseal/ssh-askpass/"
-  url "https://github.com/theseal/ssh-askpass/archive/v1.2.0.tar.gz"
-  sha256 "4b6770247060a6e68100a72a2b95dccfc5e40192961c681078da348c2d8926fe"
+  url "https://github.com/theseal/ssh-askpass/archive/v1.2.1.tar.gz"
+  sha256 "285e52794db4d1e5d230b115db138cc9b5fcd5e0171c41e3b540e41c540bf357"
 
   def install
     bin.install "ssh-askpass"
