@@ -43,7 +43,7 @@ class SshAskpass < Formula
     EOS
   end
 
-  def caveats; <<-EOF.undent
+  def caveats; <<-EOF
     NOTE: After you have started the launchd service (read below) you need to log out and in (reboot might be easiest) before you can add keys to the agent with `ssh-add -c`.
     EOF
   end
