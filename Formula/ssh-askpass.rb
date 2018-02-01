@@ -9,7 +9,7 @@ class SshAskpass < Formula
     bin.install "ssh-askpass"
   end
 
-  def plist; <<-EOS.undent
+  def plist; <<~EOS
     <?xml version="1.0" encoding="UTF-8"?>
         <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
         <plist version="1.0">
@@ -43,7 +43,7 @@ class SshAskpass < Formula
     EOS
   end
 
-  def caveats; <<-EOF.undent
+  def caveats; <<~EOF
     NOTE: After you have started the launchd service (read below) you need to log out and in (reboot might be easiest) before you can add keys to the agent with `ssh-add -c`.
     EOF
   end
