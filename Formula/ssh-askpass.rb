@@ -1,6 +1,5 @@
-require "formula"
-
 class SshAskpass < Formula
+  desc "The ssh-askpass util for MacOS"
   homepage "https://github.com/theseal/ssh-askpass/"
   url "https://github.com/theseal/ssh-askpass/archive/v1.2.1.tar.gz"
   sha256 "285e52794db4d1e5d230b115db138cc9b5fcd5e0171c41e3b540e41c540bf357"
@@ -8,6 +7,13 @@ class SshAskpass < Formula
   def install
     bin.install "ssh-askpass"
   end
+
+  def caveats; <<~EOF
+    NOTE: After you have started the launchd service (read below) you need to log out and in (reboot might be easiest) before you can add keys to the agent with `ssh-add -c`.
+    EOF
+  end
+
+  plist_options :startup => "true"
 
   def plist; <<~EOS
     <?xml version="1.0" encoding="UTF-8"?>
@@ -43,8 +49,7 @@ class SshAskpass < Formula
     EOS
   end
 
-  def caveats; <<~EOF
-    NOTE: After you have started the launchd service (read below) you need to log out and in (reboot might be easiest) before you can add keys to the agent with `ssh-add -c`.
-    EOF
+  test do
+    system "true"
   end
 end
