@@ -1,8 +1,8 @@
 class SshAskpass < Formula
   desc "The ssh-askpass util for MacOS"
   homepage "https://github.com/theseal/ssh-askpass/"
-  url "https://github.com/theseal/ssh-askpass/archive/v1.2.1.tar.gz"
-  sha256 "285e52794db4d1e5d230b115db138cc9b5fcd5e0171c41e3b540e41c540bf357"
+  url "https://github.com/theseal/ssh-askpass/archive/v1.2.2.tar.gz"
+  sha256 "a32e8bccbe44adddab3192cc4263d2c2d7f0fc2613ee80be4fcf46e233cea970"
 
   def install
     bin.install "ssh-askpass"
