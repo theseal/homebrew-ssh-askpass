@@ -46,8 +46,4 @@ class SshAskpass < Formula
         </plist>
     EOS
   end
-
-  test do
-    system "true"
-  end
 end
