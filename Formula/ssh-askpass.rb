@@ -6,6 +6,9 @@ class SshAskpass < Formula
 
   def install
     bin.install "#{name}"
+    # The label in the plist must be #{plist_name} in order for `brew services` to work
+    # See https://github.com/Homebrew/homebrew-services/issues/376
+    inreplace "ssh-askpass.plist", /<string>com.github.theseal.ssh-askpass<\/string>/, "<string>#{plist_name}</string>"
     prefix.install "#{name}.plist" => "#{plist_name}.plist"
   end
 
