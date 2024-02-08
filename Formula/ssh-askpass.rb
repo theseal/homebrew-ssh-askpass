@@ -24,4 +24,8 @@ class SshAskpass < Formula
   test do
     system "true"
   end
+
+  service do
+    name macos: "#{plist_name}"
+  end
 end
